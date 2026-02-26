@@ -34,48 +34,48 @@ export const portfolioData = {
   ],
   projects: [
     {
-      slug: "amazing-business-landing-page",
-      repo: "amazing-business-landing-page-project",
-      title: "Amazing Business Landing",
-      hook: "A high-conversion landing page designed for modern businesses. Built to drive engagement and capture leads efficiently.",
-      techChoice: "HTML, CSS, Bootstrap for rapid layout structure and reliable responsive behavior across all devices.",
-      hardestBug: "Ensuring perfect vertical rhythm and responsive typography across all mobile breakpoints without breaking the complex grid layout.",
-      performanceWins: "Achieved a 98/100 Lighthouse performance score by optimizing image assets and eliminating render-blocking CSS.",
-      links: { github: "#", live: "#" },
-      categories: ["Frontend", "Landing Page"]
+      slug: "corporate-wp-solution",
+      repo: "corporate-wp-site",
+      title: "Corporate WordPress Solution",
+      hook: "A high-performance corporate website built with custom WordPress architecture for maximum scalability and speed.",
+      techChoice: "WordPress, Elementor Pro, and Custom CSS for a unique brand identity and pixel-perfect responsiveness.",
+      hardestBug: "Optimizing the database queries for custom post types while maintaining a sub-1s load time on shared hosting.",
+      performanceWins: "Implemented advanced caching and image optimization, achieving a 99/100 Mobile speed score.",
+      links: { github: "https://github.com/Muhammadkhan-2008", live: "#" },
+      categories: ["WordPress", "Business"]
     },
     {
-      slug: "oxford-university-clone",
-      repo: "Oxford-university-clone-of-Front-end-",
-      title: "Oxford University Clone",
-      hook: "A pixel-perfect frontend clone of the Oxford University website. Focused deeply on semantic HTML and accessibility.",
-      techChoice: "Pure HTML/CSS and vanilla JavaScript to deeply understand the DOM structure and traditional styling without relying on heavy frameworks.",
-      hardestBug: "Replicating the exact dropdown navigation menu behavior for mobile touch devices and screen readers simultaneously.",
-      performanceWins: "Implemented native lazy loading for heavy hero images which cut the initial load time by 40%.",
-      links: { github: "#", live: "#" },
-      categories: ["Clone", "UI/UX"]
+      slug: "ecommerce-wp-store",
+      repo: "wp-ecommerce-store",
+      title: "Premium E-commerce Store",
+      hook: "A fully functional WooCommerce store with custom checkout flows and dynamic product filtering.",
+      techChoice: "WooCommerce, JavaScript, and custom PHP templates to extend standard store functionality.",
+      hardestBug: "Syncing real-time inventory levels across multiple product variations without impacting page render speed.",
+      performanceWins: "Reduced checkout abandonment by 25% through simplified UI and optimized mobile payment gateways.",
+      links: { github: "https://github.com/Muhammadkhan-2008", live: "#" },
+      categories: ["WordPress", "E-commerce"]
     },
     {
-      slug: "advance-calculator",
-      repo: "Advance-calculator-",
-      title: "Advance Calculator",
-      hook: "A fully functional advanced calculator supporting memory and complex operations. Features a sleek, neumorphic-inspired UI.",
-      techChoice: "JavaScript for complex mathematical logic and Tailwind CSS for rapid styling and robust interactive states.",
-      hardestBug: "Handling edge cases in floating-point math precision and sequential operation chaining in the application state.",
-      performanceWins: "Kept the bundle size extremely small (under 50kb) by using vanilla JS instead of importing heavy math libraries.",
-      links: { github: "#", live: "#" },
-      categories: ["App", "JavaScript"]
+      slug: "modern-blog-platform",
+      repo: "modern-wp-blog",
+      title: "Modern Content Platform",
+      hook: "A content-first blog platform designed for readability and SEO dominance in competitive niches.",
+      techChoice: "Gutenberg blocks and custom Tailwind-infused WordPress theme for lightning-fast content delivery.",
+      hardestBug: "Ensuring complex typography remained readable and perfectly aligned across over 50 different device screen sizes.",
+      performanceWins: "Achieved 'Passed' status on all Core Web Vitals from day one of launch.",
+      links: { github: "https://github.com/Muhammadkhan-2008", live: "#" },
+      categories: ["WordPress", "Blog"]
     },
     {
-      slug: "muhammad-khans-portfolio",
-      repo: "Muhammad-khan-s-Portfolio",
-      title: "Personal Portfolio v1",
-      hook: "My previous personal portfolio showcasing my evolution as a developer. A testament to clean design and functional UI.",
-      techChoice: "React and Tailwind CSS to create a reusable component architecture and smooth routing experience.",
-      hardestBug: "Implementing a custom scroll-spy navigation that dynamically updates the active link precisely as sections enter the viewport.",
-      performanceWins: "Used React Suspense to code-split routes, achieving a near-instant first paint on initial page load.",
-      links: { github: "#", live: "#" },
-      categories: ["Portfolio", "React"]
+      slug: "real-estate-portal",
+      repo: "wp-real-estate",
+      title: "Real Estate Property Portal",
+      hook: "A dynamic property listing portal with advanced search, map integration, and lead generation systems.",
+      techChoice: "WordPress, ACF (Advanced Custom Fields), and Mapbox API for interactive property exploration.",
+      hardestBug: "Developing a robust filtering system that handled thousands of properties without refreshing the page.",
+      performanceWins: "Used lazy loading for all property gallery images, reducing initial page weight by 3MB.",
+      links: { github: "https://github.com/Muhammadkhan-2008", live: "#" },
+      categories: ["WordPress", "Portal"]
     }
   ]
 };
