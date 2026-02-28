@@ -15,3 +15,5 @@ client/src/tmpclaude-*
 *.tmp
 1.jpg
 1.png
+
+.vercel
