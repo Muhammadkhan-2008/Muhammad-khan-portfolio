@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg1)"/>
+  <rect x="34" y="34" width="1532" height="932" rx="28" fill="none" stroke="#0ea5e9" stroke-width="8"/>
+  <rect x="76" y="76" width="1448" height="848" rx="24" fill="#ffffff" stroke="#bae6fd" stroke-width="4"/>
+  <text x="800" y="190" text-anchor="middle" fill="#0f172a" font-family="Georgia, serif" font-size="68" font-weight="700">Certificate of Internship</text>
+  <text x="800" y="255" text-anchor="middle" fill="#334155" font-family="Arial, sans-serif" font-size="28">This is to certify that</text>
+  <text x="800" y="340" text-anchor="middle" fill="#0369a1" font-family="Georgia, serif" font-size="60" font-weight="700">Muhammad Khan</text>
+  <text x="800" y="405" text-anchor="middle" fill="#334155" font-family="Arial, sans-serif" font-size="30">has successfully completed WordPress Internship Program</text>
+  <text x="800" y="462" text-anchor="middle" fill="#475569" font-family="Arial, sans-serif" font-size="26">at Internee.pk</text>
+  <line x1="290" y1="640" x2="690" y2="640" stroke="#94a3b8" stroke-width="3"/>
+  <line x1="910" y1="640" x2="1310" y2="640" stroke="#94a3b8" stroke-width="3"/>
+  <text x="490" y="680" text-anchor="middle" fill="#0f172a" font-family="Arial, sans-serif" font-size="24" font-weight="600">Authorized Signature</text>
+  <text x="1110" y="680" text-anchor="middle" fill="#0f172a" font-family="Arial, sans-serif" font-size="24" font-weight="600">Date: 2026</text>
+  <circle cx="800" cy="760" r="78" fill="none" stroke="#0284c7" stroke-width="7"/>
+  <text x="800" y="772" text-anchor="middle" fill="#0284c7" font-family="Arial, sans-serif" font-size="30" font-weight="700">INTERNEE</text>
+</svg>

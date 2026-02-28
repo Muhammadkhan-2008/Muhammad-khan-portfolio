@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eef2ff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg2)"/>
+  <rect x="34" y="34" width="1532" height="932" rx="26" fill="none" stroke="#3b82f6" stroke-width="8"/>
+  <rect x="82" y="82" width="1436" height="836" rx="24" fill="#ffffff" stroke="#c7d2fe" stroke-width="4"/>
+  <text x="800" y="178" text-anchor="middle" fill="#111827" font-family="Georgia, serif" font-size="66" font-weight="700">Certificate of Completion</text>
+  <text x="800" y="245" text-anchor="middle" fill="#334155" font-family="Arial, sans-serif" font-size="28">Presented to</text>
+  <text x="800" y="328" text-anchor="middle" fill="#1d4ed8" font-family="Georgia, serif" font-size="60" font-weight="700">Muhammad Khan</text>
+  <text x="800" y="393" text-anchor="middle" fill="#334155" font-family="Arial, sans-serif" font-size="30">for successfully completing Frontend Internship</text>
+  <text x="800" y="448" text-anchor="middle" fill="#475569" font-family="Arial, sans-serif" font-size="26">at CodeAlpha</text>
+  <rect x="570" y="520" width="460" height="84" rx="14" fill="#1d4ed8"/>
+  <text x="800" y="573" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="32" font-weight="700">EXCELLENCE IN UI BUILDING</text>
+  <line x1="300" y1="700" x2="700" y2="700" stroke="#94a3b8" stroke-width="3"/>
+  <line x1="900" y1="700" x2="1300" y2="700" stroke="#94a3b8" stroke-width="3"/>
+  <text x="500" y="742" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="24" font-weight="600">Program Lead</text>
+  <text x="1100" y="742" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="24" font-weight="600">Date: 2026</text>
+  <circle cx="800" cy="790" r="74" fill="none" stroke="#1d4ed8" stroke-width="8"/>
+  <text x="800" y="801" text-anchor="middle" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="32" font-weight="700">CODEALPHA</text>
+</svg>
