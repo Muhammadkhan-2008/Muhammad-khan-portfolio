@@ -7,7 +7,7 @@ export default function ContactSection({ form, setForm, onSubmit, sending, sent 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="rounded-[2rem] border border-border bg-card p-6 md:p-10"
       >

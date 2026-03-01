@@ -6,7 +6,7 @@ export default function AboutSection({ stats }) {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.25 }}
+        viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="rounded-[2rem] border border-border/70 bg-card/80 p-8 shadow-sm md:p-10"
       >

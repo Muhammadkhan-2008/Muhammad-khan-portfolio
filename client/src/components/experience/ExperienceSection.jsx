@@ -40,7 +40,7 @@ export default function ExperienceSection({ journey }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
         className="mb-8"
       >
         <p className="inline-flex items-center gap-2 rounded-full border border-violet-300/60 bg-violet-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-violet-700 dark:border-violet-400/35 dark:bg-violet-500/15 dark:text-violet-300">
@@ -57,7 +57,7 @@ export default function ExperienceSection({ journey }) {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             whileHover={{ y: -6, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: index * 0.08, duration: 0.35, ease: "easeOut" }}
             className="brand-surface transform-gpu rounded-3xl border border-border bg-card p-6"
             style={{

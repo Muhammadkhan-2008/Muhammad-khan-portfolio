@@ -163,7 +163,7 @@ export default function ShowcaseSection({
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.3 }}
         className="mb-8 text-center"
       >
         <h2 className="font-display text-4xl font-bold md:text-5xl">My Services</h2>
@@ -182,7 +182,7 @@ export default function ShowcaseSection({
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ y: -8, scale: 1.01 }}
-              viewport={{ once: false, amount: 0.22 }}
+              viewport={{ once: true, amount: 0.22 }}
               transition={{ duration: 0.32, ease: "easeOut" }}
               className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6"
               style={{ "--surface-accent": serviceAccents[index] ?? "#38BDF8" }}
@@ -218,7 +218,7 @@ export default function ShowcaseSection({
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
         className="mt-14 text-center"
       >
         <p className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
@@ -231,7 +231,7 @@ export default function ShowcaseSection({
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
         className={`sticky top-24 z-30 mx-auto mt-8 w-full max-w-xl rounded-2xl border border-border bg-background/85 p-2 backdrop-blur-xl transition-all duration-300 ${
           tabsVisible
             ? "translate-y-0 scale-100 rotate-0 opacity-100 blur-0"
@@ -277,7 +277,7 @@ export default function ShowcaseSection({
                     key={project.title}
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     whileHover={{ y: -9, scale: 1.01 }}
                     transition={{ delay: index * 0.06, duration: 0.32, ease: "easeOut" }}
                     className="project-brand-card transform-gpu group relative overflow-hidden rounded-3xl border border-border bg-card p-6"
@@ -413,7 +413,7 @@ export default function ShowcaseSection({
                   key={section.title}
                   initial={{ opacity: 0, y: 18, rotateX: -84 }}
                   whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: false, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
                   className="rounded-3xl border border-border bg-card p-5 [transform-style:preserve-3d]"
                 >

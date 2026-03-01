@@ -125,6 +125,40 @@ async function sendChatAlertEmail({ question, answer, ip }) {
   }
 }
 
+async function sendChatToMakeWebhook({ question, answer, ip, history }) {
+  const webhookUrl =
+    process.env.MAKE_WEBHOOK_URL ||
+    "https://hook.us2.make.com/vjlrl45y9bnytgh1gyhl1h4uwjdyhq2k";
+
+  if (!webhookUrl) {
+    return;
+  }
+
+  const payload = {
+    source: "portfolio-chat",
+    timestamp: new Date().toISOString(),
+    ip,
+    userMessage: question,
+    assistantReply: answer,
+    history,
+  };
+
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const textBody = await response.text();
+    const error = new Error(`Make webhook error: ${textBody.slice(0, 300)}`);
+    error.status = response.status;
+    throw error;
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -199,6 +233,13 @@ export default async function handler(req, res) {
       await sendChatAlertEmail({ question, answer, ip });
     } catch {
       // Email failure should not break chat response.
+    }
+
+    // Optional: Make.com automation webhook (runs in parallel path with email).
+    try {
+      await sendChatToMakeWebhook({ question, answer, ip, history });
+    } catch {
+      // Webhook failure should not break chat response.
     }
 
     res.status(200).json({ answer });

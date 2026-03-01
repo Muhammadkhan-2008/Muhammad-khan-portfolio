@@ -40,6 +40,7 @@ export function Home() {
   const [resumeDownloadFormat, setResumeDownloadFormat] = useState("docx");
   const [resumeAutoOpenAfterDownload, setResumeAutoOpenAfterDownload] = useState(false);
   const [resumeDownloading, setResumeDownloading] = useState(false);
+  const [chatReady, setChatReady] = useState(false);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -71,6 +72,28 @@ export function Home() {
       }
       if (themeApplyTimeoutRef.current) {
         clearTimeout(themeApplyTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    let timeoutId;
+    let idleId;
+
+    const enableChat = () => setChatReady(true);
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(enableChat, { timeout: 1800 });
+    } else {
+      timeoutId = setTimeout(enableChat, 1200);
+    }
+
+    return () => {
+      if (idleId && typeof window !== "undefined" && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
     };
   }, []);
@@ -239,35 +262,45 @@ export function Home() {
         className="mx-auto flex w-full max-w-none flex-col px-5 pb-28 pt-28 md:px-10 lg:px-14"
       >
         <HeroSection onNavigate={scrollToSection} onResumeClick={openResumeOptions} theme={theme} />
-        <AboutSection stats={stats} />
-        <ShowcaseSection
-          services={services}
-          skills={skills}
-          toolboxCards={toolboxCards}
-          projects={projects}
-          certificates={certificates}
-        />
-        <ExperienceSection journey={journey} />
-        <ContactSection
-          form={form}
-          setForm={setForm}
-          onSubmit={onSubmit}
-          sending={sending}
-          sent={sent}
-        />
+        <div className="defer-section">
+          <AboutSection stats={stats} />
+        </div>
+        <div className="defer-section">
+          <ShowcaseSection
+            services={services}
+            skills={skills}
+            toolboxCards={toolboxCards}
+            projects={projects}
+            certificates={certificates}
+          />
+        </div>
+        <div className="defer-section">
+          <ExperienceSection journey={journey} />
+        </div>
+        <div className="defer-section">
+          <ContactSection
+            form={form}
+            setForm={setForm}
+            onSubmit={onSubmit}
+            sending={sending}
+            sent={sent}
+          />
+        </div>
       </main>
 
-      <ChatAssistant
-        resumeData={resumeData}
-        skills={skills}
-        services={services}
-        projects={projects}
-        journey={journey}
-        socialLinks={socialLinks}
-        whatsappNumber={whatsappNumber}
-        publicApiKey={import.meta.env.VITE_OPENROUTER_API_KEY}
-        allowDirectFallback={import.meta.env.VITE_ALLOW_DIRECT_CHAT_FALLBACK === "true"}
-      />
+      {chatReady && (
+        <ChatAssistant
+          resumeData={resumeData}
+          skills={skills}
+          services={services}
+          projects={projects}
+          journey={journey}
+          socialLinks={socialLinks}
+          whatsappNumber={whatsappNumber}
+          publicApiKey={import.meta.env.VITE_OPENROUTER_API_KEY}
+          allowDirectFallback={import.meta.env.VITE_ALLOW_DIRECT_CHAT_FALLBACK === "true"}
+        />
+      )}
 
       <AnimatePresence>
         {resumeOptionsOpen && (
