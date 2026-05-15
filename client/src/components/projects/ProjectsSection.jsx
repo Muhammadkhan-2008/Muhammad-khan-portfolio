@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, ExternalLink, FolderKanban, Github } from "lucide-react";
+import { CheckCircle2, ExternalLink, FolderKanban, Github, Sparkles } from "lucide-react";
 
 const projectThemes = [
+  { match: "FAST Institute", color: "#0F766E", text: "#FFFFFF", slug: "googlegemini" },
   { match: "Image/AI Gallery", color: "#E0F2FE", text: "#0C4A6E", slug: "googlephotos" },
   { match: "Netflix", color: "#E50914", text: "#FFFFFF", slug: "netflix" },
   { match: "Prime Video", color: "#00A8E1", text: "#FFFFFF", slug: "primevideo" },
@@ -32,6 +33,7 @@ const techMeta = {
   Bootstrap: { slug: "bootstrap", color: "#7952B3", text: "#FFFFFF" },
   "Tailwind CSS": { slug: "tailwindcss", color: "#06B6D4", text: "#0F172A" },
   WordPress: { slug: "wordpress", color: "#21759B", text: "#FFFFFF" },
+  "AI Platform": { slug: "googlegemini", color: "#0F766E", text: "#FFFFFF" },
 };
 
 function fallbackTechIcon(label) {
@@ -97,7 +99,9 @@ export default function ProjectsSection({ projects }) {
               whileHover={{ y: -10, scale: 1.01 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: index * 0.08, duration: 0.35, ease: "easeOut" }}
-              className="project-brand-card transform-gpu group relative overflow-hidden rounded-3xl border border-border bg-card p-6"
+              className={`project-brand-card transform-gpu group relative overflow-hidden rounded-3xl border bg-card p-6 ${
+                project.featured ? "border-primary/45 shadow-[0_22px_70px_rgba(20,184,166,0.18)] lg:col-span-2" : "border-border"
+              }`}
               style={{
                 "--project-bg": theme.color,
                 "--project-fg": theme.text,
@@ -105,7 +109,8 @@ export default function ProjectsSection({ projects }) {
               }}
             >
               <div className="project-on-hover mb-5 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary transition-colors duration-300 dark:group-hover:bg-white/20">
-                <CheckCircle2 size={14} /> Case Study
+                {project.featured ? <Sparkles size={14} /> : <CheckCircle2 size={14} />}
+                {project.badge ?? "Case Study"}
               </div>
 
               <div className="flex items-start justify-between gap-3">
@@ -162,7 +167,7 @@ export default function ProjectsSection({ projects }) {
                   rel="noreferrer"
                   className="project-on-hover inline-flex items-center gap-1.5 text-primary transition-transform duration-300 hover:scale-105"
                 >
-                  Code <Github size={14} />
+                  {project.ctaLabel ?? "Code"} {project.ctaLabel === "View Screenshots" ? <ExternalLink size={14} /> : <Github size={14} />}
                 </a>
                 <a
                   href={project.demo}

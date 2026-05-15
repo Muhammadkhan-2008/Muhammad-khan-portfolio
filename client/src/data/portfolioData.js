@@ -10,7 +10,7 @@ export const navItems = [
 export const stats = [
   { value: "5+", label: "Months Building" },
   { value: "7", label: "Core Technologies" },
-  { value: "12+", label: "Frontend Projects" },
+  { value: "13+", label: "Frontend Projects" },
   { value: "99%", label: "Responsive Focus" },
 ];
 
@@ -81,6 +81,17 @@ export const toolboxCards = [
 
 export const projects = [
   {
+    title: "FAST Institute - AI Based EdTech Platform",
+    summary:
+      "Large-scale AI based educational platform inspired by Coursera and Maksad, with live classes, chatbot support, learning resources, and a complete student-focused learning experience.",
+    tech: ["React", "JavaScript", "Tailwind CSS", "AI Platform"],
+    github: "https://drive.google.com/drive/folders/13Y1y6EecfKcFICZU1EXXH902mI3psYWN?usp=drive_link",
+    demo: "#",
+    featured: true,
+    badge: "Big Project",
+    ctaLabel: "View Screenshots",
+  },
+  {
     title: "Personal Portfolio (HTML, CSS, JS)",
     summary:
       "Personal portfolio website built with clean structure, responsive sections, and modern UI polish.",
@@ -93,64 +104,72 @@ export const projects = [
     summary:
       "Landing-style clone inspired by Netflix UI using semantic HTML and utility-driven layout styling.",
     tech: ["HTML", "CSS"],
-    github: "https://github.com/Muhammadkhan-2008?tab=repositories&q=netflix+html+css",
+    github: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/Netfilix-clone",
     demo: "#",
+    ctaLabel: "View Repository",
   },
   {
     title: "Prime Video Clone",
     summary:
       "Prime Video inspired interface with Bootstrap-based structure and responsive media card layout.",
     tech: ["HTML", "CSS", "Bootstrap"],
-    github: "https://github.com/Muhammadkhan-2008?tab=repositories&q=prime+video+bootstrap",
+    github: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/Prime%20video%20Clone%20Project",
     demo: "#",
+    ctaLabel: "View Repository",
   },
   {
     title: "Microsoft.com Clone",
     summary:
       "Microsoft inspired homepage clone with structured sections and responsive Tailwind utility styling.",
     tech: ["HTML", "CSS", "Tailwind CSS"],
-    github: "https://github.com/Muhammadkhan-2008?tab=repositories&q=microsoft+tailwind",
+    github: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/Tailwind%20css%20learning/Microsoft%20clone",
     demo: "#",
+    ctaLabel: "View Repository",
   },
   {
-    title: "YouTube Music + Spotify Clone",
+    title: "Spotify Clone",
     summary:
       "Music platform-inspired clone focusing on visual hierarchy, playlist sections, and media-player layout.",
     tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/Muhammadkhan-2008?tab=repositories&q=youtube+music+spotify+clone",
+    github: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/ultimate%20javascript%20learning/spotify%20clone",
     demo: "#",
+    ctaLabel: "View Repository",
   },
   {
     title: "Internee.pk Official Website Clone",
     summary:
       "WordPress clone implementation inspired by Internee.pk structure with responsive pages and clean content flow.",
     tech: ["WordPress"],
-    github: "https://github.com/Muhammadkhan-2008?tab=repositories&q=internee+official+website+clone+wordpress",
+    github: "https://github.com/Muhammadkhan-2008/internee.pk_websiteClone",
     demo: "#",
+    ctaLabel: "View Repository",
   },
   {
     title: "Jobee Job Portal",
     summary:
       "WordPress based job portal style website with listing structure, usability-focused forms, and practical navigation.",
     tech: ["WordPress"],
-    github: "https://github.com/Muhammadkhan-2008?tab=repositories&q=jobee+job+portal",
+    github: "https://github.com/Muhammadkhan-2008/internee.pk-jobeeProject",
     demo: "#",
+    ctaLabel: "View Repository",
   },
   {
     title: "CodeAlpha Music Player (YouTube Music Clone)",
     summary:
       "Frontend internship project focused on a music-player style interface inspired by YouTube Music.",
     tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/search?q=user%3AMuhammadkhan-2008+CodeAlpha+Music+Player+Clone+of+YouTube+Music&type=repositories",
+    github: "https://github.com/Muhammadkhan-2008/CodeAlpha_MusicPlayer",
     demo: "#",
+    ctaLabel: "View Repository",
   },
   {
     title: "CodeAlpha Image/AI Gallery Clone",
     summary:
       "Gallery-style layout project with clean card arrangements and image interaction states.",
     tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/search?q=user%3AMuhammadkhan-2008+CodeAlpha+Image+Gallery+AI+Gallery+Clone&type=repositories",
+    github: "https://github.com/Muhammadkhan-2008/CodeAlpha_ImageGallery",
     demo: "#",
+    ctaLabel: "View Repository",
   },
 ];
 
@@ -184,19 +203,23 @@ export const journey = [
     projectLinks: [
       {
         name: "Netflix Clone (HTML/CSS)",
-        url: "https://github.com/Muhammadkhan-2008?tab=repositories&q=netflix+html+css",
+        url: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/Netfilix-clone",
       },
       {
         name: "Prime Video Clone (HTML/CSS/Bootstrap)",
-        url: "https://github.com/Muhammadkhan-2008?tab=repositories&q=prime+video+bootstrap",
+        url: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/Prime%20video%20Clone%20Project",
       },
       {
         name: "Microsoft.com Clone (HTML/CSS/Tailwind)",
-        url: "https://github.com/Muhammadkhan-2008?tab=repositories&q=microsoft+tailwind",
+        url: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/Tailwind%20css%20learning/Microsoft%20clone",
       },
       {
-        name: "Spotify Clone / YouTube Music Clone",
-        url: "https://github.com/Muhammadkhan-2008?tab=repositories&q=youtube+music+spotify+clone",
+        name: "Spotify Clone",
+        url: "https://github.com/Muhammadkhan-2008/web-development-practise-and-project/tree/main/ultimate%20javascript%20learning/spotify%20clone",
+      },
+      {
+        name: "FAST Institute - AI Based EdTech Platform",
+        url: "https://drive.google.com/drive/folders/13Y1y6EecfKcFICZU1EXXH902mI3psYWN?usp=drive_link",
       },
       {
         name: "Personal Portfolio Smooth Interactive (React)",
@@ -214,7 +237,7 @@ export const journey = [
     projectLinks: [
       {
         name: "Internee.pk Official Website Clone (WordPress)",
-        url: "https://github.com/Muhammadkhan-2008?tab=repositories&q=internee+official+website+clone+wordpress",
+        url: "https://github.com/Muhammadkhan-2008/internee.pk_websiteClone",
       },
       {
         name: "Personal Portfolio with AI Chat Feature (WordPress)",
@@ -240,11 +263,11 @@ export const journey = [
     projectLinks: [
       {
         name: "CodeAlpha Music Player Clone of YouTube Music",
-        url: "https://github.com/search?q=user%3AMuhammadkhan-2008+CodeAlpha+Music+Player+Clone+of+YouTube+Music&type=repositories",
+        url: "https://github.com/Muhammadkhan-2008/CodeAlpha_MusicPlayer",
       },
       {
         name: "CodeAlpha Image Gallery AI Gallery Clone",
-        url: "https://github.com/search?q=user%3AMuhammadkhan-2008+CodeAlpha+Image+Gallery+AI+Gallery+Clone&type=repositories",
+        url: "https://github.com/Muhammadkhan-2008/CodeAlpha_ImageGallery",
       },
       {
         name: "CodeAlpha Personal Portfolio",
@@ -310,10 +333,11 @@ export const resumeData = {
   ],
   highlights: [
     "Personal Portfolio (React)",
+    "FAST Institute - AI Based EdTech Platform",
     "Netflix Clone",
     "Prime Video Clone",
     "Microsoft.com Clone",
-    "YouTube Music / Spotify Clone",
+    "Spotify Clone",
     "Internee.pk Website Clone",
   ],
   education: [

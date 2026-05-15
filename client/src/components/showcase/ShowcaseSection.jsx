@@ -50,6 +50,7 @@ const tabs = [
 ];
 
 const projectThemes = [
+  { match: "FAST Institute", color: "#0F766E", text: "#FFFFFF", slug: "googlegemini" },
   { match: "Image/AI Gallery", color: "#E0F2FE", text: "#0C4A6E", slug: "googlephotos" },
   { match: "Netflix", color: "#E50914", text: "#FFFFFF", slug: "netflix" },
   { match: "Prime Video", color: "#00A8E1", text: "#FFFFFF", slug: "primevideo" },
@@ -74,6 +75,7 @@ const techMeta = {
   "VS Code": { slug: "visualstudiocode", color: "#007ACC", text: "#FFFFFF" },
   Figma: { slug: "figma", color: "#A259FF", text: "#FFFFFF" },
   "Framer Motion": { slug: "framer", color: "#0055FF", text: "#FFFFFF" },
+  "AI Platform": { slug: "googlegemini", color: "#0F766E", text: "#FFFFFF" },
   "Responsive Design": { slug: "googlechrome", color: "#0EA5E9", text: "#FFFFFF" },
   "Responsive Layouts": { slug: "googlechrome", color: "#0EA5E9", text: "#FFFFFF" },
   "UI Animation": { slug: "framer", color: "#0055FF", text: "#FFFFFF" },
@@ -280,7 +282,9 @@ export default function ShowcaseSection({
                     viewport={{ once: true, amount: 0.2 }}
                     whileHover={{ y: -9, scale: 1.01 }}
                     transition={{ delay: index * 0.06, duration: 0.32, ease: "easeOut" }}
-                    className="project-brand-card transform-gpu group relative overflow-hidden rounded-3xl border border-border bg-card p-6"
+                    className={`project-brand-card transform-gpu group relative overflow-hidden rounded-3xl border bg-card p-6 ${
+                      project.featured ? "border-primary/45 shadow-[0_22px_70px_rgba(20,184,166,0.18)] lg:col-span-2" : "border-border"
+                    }`}
                     style={{
                       "--project-bg": theme.color,
                       "--project-fg": theme.text,
@@ -288,7 +292,8 @@ export default function ShowcaseSection({
                     }}
                   >
                     <div className="project-on-hover mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary transition-colors duration-300">
-                      Case Study
+                      {project.featured && <Sparkles size={13} />}
+                      {project.badge ?? "Case Study"}
                     </div>
 
                     <div className="flex items-start justify-between gap-3">
@@ -344,7 +349,7 @@ export default function ShowcaseSection({
                       rel="noreferrer"
                       className="project-on-hover mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-transform duration-300 hover:scale-105"
                     >
-                      View Project <ExternalLink size={14} />
+                      {project.ctaLabel ?? "View Project"} <ExternalLink size={14} />
                     </a>
 
                     <div
