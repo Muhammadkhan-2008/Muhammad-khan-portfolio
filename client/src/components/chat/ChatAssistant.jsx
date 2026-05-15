@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Loader2, MessageCircle, Send, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { CalendarClock, Loader2, MessageCircle, Send, Sparkles, X } from "lucide-react";
 
 function normalizeProjects(projects = []) {
   return projects
@@ -14,7 +14,7 @@ function normalizeJourney(journey = []) {
 }
 
 function detectLeadIntent(text) {
-  return /(book|appointment|hire|order|project|quote|job|work with|collab)/i.test(text);
+  return /(book|appointment|hire|order|quote|job|work with|collab|meeting|call|discuss.*project|project.*discuss|want.*project|need.*website|need.*app)/i.test(text);
 }
 
 function formatHistory(messages) {
@@ -36,6 +36,7 @@ export default function ChatAssistant({
   allowDirectFallback = false,
 }) {
   const [open, setOpen] = useState(false);
+  const [secretaryPromptVisible, setSecretaryPromptVisible] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [leadMode, setLeadMode] = useState(false);
@@ -43,15 +44,35 @@ export default function ChatAssistant({
     name: "",
     phone: "",
     email: "",
+    preferredTime: "",
     details: "",
   });
   const [messages, setMessages] = useState([
     {
       role: "assistant",
       content:
-        "Hello, I am Muhammad Khan's AI assistant. I can help with skills, projects, hiring, or appointments. I can also collect your contact details and prepare your request for WhatsApp. For project follow-up, chat messages may be logged.",
+        "Assalam o Alaikum, I am Muhammad Khan's AI secretary. I can explain his projects, skills, services, and portfolio details. For appointments or project work, I can collect your details and prepare a WhatsApp message for Muhammad Khan.",
     },
   ]);
+
+  useEffect(() => {
+    if (open) {
+      setSecretaryPromptVisible(false);
+      return undefined;
+    }
+
+    const alreadyShown = sessionStorage.getItem("aiSecretaryPromptShown") === "true";
+    if (alreadyShown) {
+      return undefined;
+    }
+
+    const timeoutId = setTimeout(() => {
+      setSecretaryPromptVisible(true);
+      sessionStorage.setItem("aiSecretaryPromptShown", "true");
+    }, 20000);
+
+    return () => clearTimeout(timeoutId);
+  }, [open]);
 
   const knowledgeBase = useMemo(() => {
     return [
@@ -118,10 +139,12 @@ export default function ChatAssistant({
     const systemPrompt = [
       "You are Muhammad Khan's portfolio assistant.",
       "Behavior rules:",
-      "- Be polite, warm, and helpful.",
+      "- Act like a smart portfolio secretary for Muhammad Khan.",
+      "- Be polite, warm, helpful, and concise.",
       "- Always respond in the same language as the user's latest message.",
       "- If user writes in English, respond in English.",
-      "- If user writes in Spanish, respond in Spanish.",
+      "- If user writes in Roman Urdu/Hinglish, respond in Roman Urdu/Hinglish.",
+      "- Explain Muhammad Khan's projects, skills, services, experience, and contact details from the provided profile.",
       "- If user asks for hiring/appointment/order, ask for name, phone, email, and project details.",
       "- Answer only from provided profile data.",
       "- Never invent any information.",
@@ -263,6 +286,7 @@ export default function ChatAssistant({
       `Client Name: ${leadForm.name}`,
       `Phone: ${leadForm.phone}`,
       `Email: ${leadForm.email || "Not provided"}`,
+      `Preferred Meeting Time: ${leadForm.preferredTime || "Not provided"}`,
       `Project Details: ${leadForm.details}`,
     ].join("\n");
 
@@ -279,15 +303,51 @@ export default function ChatAssistant({
     ]);
 
     setLeadMode(false);
-    setLeadForm({ name: "", phone: "", email: "", details: "" });
+    setLeadForm({ name: "", phone: "", email: "", preferredTime: "", details: "" });
   };
 
   return (
     <div className="fixed bottom-24 right-4 z-[78] md:bottom-6">
+      {!open && secretaryPromptVisible && (
+        <div className="mb-3 w-[min(88vw,340px)] rounded-2xl border border-primary/25 bg-card p-3 shadow-2xl">
+          <div className="mb-2 flex items-start justify-between gap-3">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+              <Sparkles size={13} />
+              AI Secretary
+            </div>
+            <button
+              type="button"
+              onClick={() => setSecretaryPromptVisible(false)}
+              className="rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+              aria-label="Dismiss AI secretary prompt"
+            >
+              <X size={14} />
+            </button>
+          </div>
+          <p className="text-sm leading-relaxed text-foreground">
+            Kuch poochna hai? Main projects, skills, pricing discussion, ya appointment ke liye details le kar WhatsApp par bhej sakta hoon.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(true);
+              setSecretaryPromptVisible(false);
+            }}
+            className="mt-3 inline-flex h-9 w-full items-center justify-center gap-2 rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground"
+          >
+            Start Chat
+            <MessageCircle size={14} />
+          </button>
+        </div>
+      )}
+
       {open ? (
         <div className="w-[min(92vw,370px)] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
           <div className="flex items-center justify-between border-b border-border bg-background/90 px-4 py-3">
-            <p className="text-sm font-semibold">AI Portfolio Chat</p>
+            <p className="inline-flex items-center gap-2 text-sm font-semibold">
+              <CalendarClock size={15} />
+              AI Secretary
+            </p>
             <button
               type="button"
               onClick={() => setOpen(false)}
@@ -367,6 +427,13 @@ export default function ChatAssistant({
                   value={leadForm.email}
                   onChange={(event) => setLeadForm((prev) => ({ ...prev, email: event.target.value }))}
                   placeholder="Email (optional)"
+                  className="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none ring-primary/30 focus:ring"
+                />
+                <input
+                  type="text"
+                  value={leadForm.preferredTime}
+                  onChange={(event) => setLeadForm((prev) => ({ ...prev, preferredTime: event.target.value }))}
+                  placeholder="Preferred appointment day/time (optional)"
                   className="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none ring-primary/30 focus:ring"
                 />
                 <textarea
