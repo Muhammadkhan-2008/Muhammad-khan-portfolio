@@ -24,6 +24,15 @@ function formatHistory(messages) {
     .join("\n");
 }
 
+function getStoredJson(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 export default function ChatAssistant({
   resumeData,
   skills,
@@ -39,6 +48,7 @@ export default function ChatAssistant({
   const [secretaryPromptVisible, setSecretaryPromptVisible] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [leadSending, setLeadSending] = useState(false);
   const [leadMode, setLeadMode] = useState(false);
   const [leadForm, setLeadForm] = useState({
     name: "",
@@ -54,6 +64,29 @@ export default function ChatAssistant({
         "Assalam o Alaikum, I am Muhammad Khan's AI secretary. I can explain his projects, skills, services, and portfolio details. For appointments or project work, I can collect your details and prepare a WhatsApp message for Muhammad Khan.",
     },
   ]);
+
+  useEffect(() => {
+    const storedMessages = getStoredJson("portfolioAiSecretaryMessages", null);
+    const storedLead = getStoredJson("portfolioAiSecretaryLead", null);
+
+    if (Array.isArray(storedMessages) && storedMessages.length > 0) {
+      setMessages(storedMessages.slice(-16));
+    }
+
+    if (storedLead && typeof storedLead === "object") {
+      setLeadForm((prev) => ({
+        ...prev,
+        name: storedLead.name || "",
+        phone: storedLead.phone || "",
+        email: storedLead.email || "",
+        preferredTime: storedLead.preferredTime || "",
+      }));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("portfolioAiSecretaryMessages", JSON.stringify(messages.slice(-16)));
+  }, [messages]);
 
   useEffect(() => {
     if (open) {
@@ -103,6 +136,19 @@ export default function ChatAssistant({
     ].join("\n");
   }, [journey, projects, resumeData, services, skills, socialLinks, whatsappNumber]);
 
+  const visitorMemory = useMemo(() => {
+    const storedLead = getStoredJson("portfolioAiSecretaryLead", {});
+    const parts = [
+      storedLead?.name ? `Visitor name: ${storedLead.name}` : "",
+      storedLead?.phone ? `Visitor phone: ${storedLead.phone}` : "",
+      storedLead?.email ? `Visitor email: ${storedLead.email}` : "",
+      storedLead?.preferredTime ? `Preferred meeting time: ${storedLead.preferredTime}` : "",
+      storedLead?.details ? `Last project/appointment details: ${storedLead.details}` : "",
+    ].filter(Boolean);
+
+    return parts.length > 0 ? parts.join("\n") : "No saved visitor memory yet.";
+  }, [messages]);
+
   const callServerlessChat = async (question, historyText) => {
     const response = await fetch("/api/chat", {
       method: "POST",
@@ -111,6 +157,7 @@ export default function ChatAssistant({
         question,
         history: historyText,
         knowledgeBase,
+        visitorMemory,
       }),
     });
 
@@ -153,6 +200,9 @@ export default function ChatAssistant({
     const userPrompt = [
       "PROFILE DATA:",
       knowledgeBase,
+      "",
+      "VISITOR MEMORY:",
+      visitorMemory,
       "",
       "RECENT CHAT:",
       historyText,
@@ -269,6 +319,10 @@ export default function ChatAssistant({
   };
 
   const submitLead = () => {
+    if (leadSending) {
+      return;
+    }
+
     if (!leadForm.name.trim() || !leadForm.phone.trim() || !leadForm.details.trim()) {
       setMessages((prev) => [
         ...prev,
@@ -280,30 +334,69 @@ export default function ChatAssistant({
       return;
     }
 
-    const message = [
-      "Hi Muhammad Khan, I want to discuss a project/appointment.",
-      "",
-      `Client Name: ${leadForm.name}`,
-      `Phone: ${leadForm.phone}`,
-      `Email: ${leadForm.email || "Not provided"}`,
-      `Preferred Meeting Time: ${leadForm.preferredTime || "Not provided"}`,
-      `Project Details: ${leadForm.details}`,
-    ].join("\n");
+    const lead = {
+      name: leadForm.name.trim(),
+      phone: leadForm.phone.trim(),
+      email: leadForm.email.trim(),
+      preferredTime: leadForm.preferredTime.trim(),
+      details: leadForm.details.trim(),
+    };
 
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setLeadSending(true);
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        role: "assistant",
-        content:
-          "I have prepared your request for WhatsApp. Please tap Send in WhatsApp and Muhammad Khan will get your details.",
-      },
-    ]);
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lead,
+        conversation: messages,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`lead_status_${response.status}`);
+        }
 
-    setLeadMode(false);
-    setLeadForm({ name: "", phone: "", email: "", preferredTime: "", details: "" });
+        localStorage.setItem("portfolioAiSecretaryLead", JSON.stringify(lead));
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              "Done. Main ne aapki details Muhammad Khan ko background me forward kar di hain. Aap isi tab me reh sakte hain; Muhammad Khan aap se WhatsApp/phone par contact kar lega.",
+          },
+        ]);
+        setLeadMode(false);
+        setLeadForm((prev) => ({ ...prev, details: "" }));
+      })
+      .catch(() => {
+        const fallbackMessage = [
+          "Hi Muhammad Khan, I want to discuss a project/appointment.",
+          "",
+          `Client Name: ${lead.name}`,
+          `Phone: ${lead.phone}`,
+          `Email: ${lead.email || "Not provided"}`,
+          `Preferred Meeting Time: ${lead.preferredTime || "Not provided"}`,
+          `Project Details: ${lead.details}`,
+        ].join("\n");
+
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(fallbackMessage)}`;
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              "Background forwarding is unavailable right now. Please use the backup WhatsApp button to send your request.",
+          },
+          {
+            role: "assistant",
+            content: whatsappUrl,
+          },
+        ]);
+      })
+      .finally(() => {
+        setLeadSending(false);
+      });
   };
 
   return (
@@ -446,10 +539,11 @@ export default function ChatAssistant({
                 <button
                   type="button"
                   onClick={submitLead}
-                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground"
+                  disabled={leadSending}
+                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
                 >
-                  Send to Muhammad Khan
-                  <Send size={14} />
+                  {leadSending ? "Forwarding..." : "Send to Muhammad Khan"}
+                  {leadSending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
                 </button>
               </div>
             ) : (

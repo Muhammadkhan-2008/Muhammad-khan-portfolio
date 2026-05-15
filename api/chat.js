@@ -178,6 +178,7 @@ export default async function handler(req, res) {
     const question = (body?.question || "").toString().trim();
     const history = (body?.history || "").toString();
     const knowledgeBase = (body?.knowledgeBase || "").toString();
+    const visitorMemory = (body?.visitorMemory || "").toString();
 
     if (!question) {
       res.status(400).json({ error: "Question is required" });
@@ -190,9 +191,10 @@ export default async function handler(req, res) {
       "- Be polite, warm, and helpful.",
       "- Always answer in the same language as the user's latest message.",
       "- If the user writes in English, respond in English.",
-      "- If the user writes in Spanish, respond in Spanish.",
+      "- If the user writes in Roman Urdu/Hinglish, respond in Roman Urdu/Hinglish.",
       "- If this is the first query, greet and offer project/hiring help.",
       "- For hiring/appointment/order requests, ask for name, phone, email, and project details.",
+      "- Use visitor memory when it is provided, but do not expose private details unless relevant.",
       "- Answer only from provided profile data.",
       "- Never invent achievements, companies, or contact details.",
     ].join("\n");
@@ -203,6 +205,9 @@ export default async function handler(req, res) {
       "",
       "RECENT CHAT:",
       history,
+      "",
+      "VISITOR MEMORY:",
+      visitorMemory,
       "",
       `USER QUESTION: ${question}`,
     ].join("\n");
